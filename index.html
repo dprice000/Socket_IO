@@ -4,6 +4,7 @@
             <link rel="stylesheet" href="index.css">
         </head>
         <body>
+            <object id="svg1" data="rw.svg" type="image/svg+xml"></object>
             <div ng-view>
                 <div id="tile-container" ng-app="project" ng-controller="myCtrl">
                     <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="bg-green temp-tile"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#8451;</h1></div>
@@ -48,13 +49,6 @@
                     });
 
                 app.controller('myCtrl', function ($scope, socket) {
-                    $scope.temps = [
-                        { 'name': 'Pipe1', 'value': 30 },
-                        { 'name': 'Pipe2', 'value': 22 },
-                        { 'name': 'Pipe3', 'value': 25 },
-                        { 'name': 'Pipe4', 'value': 32 }
-                    ];
-
                     socket.on('readouts', function(data) {
                         // Parses new JSON and updates ViewModel temps property.
                         console.log(data);

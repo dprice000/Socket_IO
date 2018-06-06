@@ -9,6 +9,10 @@ app.get('/', function(req, res,next) {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/rw.svg', function(req, res,next) {  
+    res.sendFile(__dirname + '/rw.svg');
+});
+
 app.get('/index.css', function(req, res,next) {  
     res.sendFile(__dirname + '/index.css');
 });
@@ -24,14 +28,14 @@ io.on('connection', function(client) {
     // });
 
     setInterval(function() {
+        var temps = [];
+
         // A JSON formated list of temperatures.
-        var temps = [
-                { 'name' : 'Pipe1', 'value': Math.floor(Math.random() * 100 + 1) },
-                { 'name' : 'Pipe2', 'value': Math.floor(Math.random() * 100 + 1) },
-                { 'name' : 'Pipe3', 'value': Math.floor(Math.random() * 100 + 1) },
-                { 'name' : 'Pipe4', 'value': Math.floor(Math.random() * 100 + 1) }
-            ];
+        for(var i = 0; i < 50; i++)
+        {
+            temps.push({ 'name' : 'Pipe' + i, 'value': Math.floor(Math.random() * 100 + 1) });
+        }
 
         client.emit('readouts', JSON.stringify(temps));
-    }, 3000);
+    }, 5000);
 });

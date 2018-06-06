@@ -1,0 +1,31 @@
+<hmtl lang="en" ng-app="project">
+        <head>
+            <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+            <link rel="stylesheet" href="index.css">
+        </head>
+        <body>
+            <div ng-view>
+            <div data-role="tile" data-size="medium" class="bg-green"><h1 class="pos-absolute pos-center">1</h1></div>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="/socket.io/socket.io.js"></script>    
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-resource.min.js">
+            </script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-route.min.js">
+            </script>
+            <script>  
+                var socket = io.connect('http://localhost:4200');
+                socket.on('connect', function(data) {
+                    socket.emit('join', 'Hello World from client');
+                });
+
+                socket.on('messages', function(data) {
+                    alert(data);
+                });
+            </script>        
+        </body>
+</hmtl> 

@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/dprice809/Socket_IO/issues"
   },
-  "homepage": "https://github.com/dprice809/Socket_IO#readme"
+  "homepage": "https://github.com/dprice809/Socket_IO#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "socket_io",
+  "description": "An example of a real time application.",
+  "main": "index.js",
+  "authors": [
+    "David Price"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "realtime"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

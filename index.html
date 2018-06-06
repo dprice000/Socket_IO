@@ -5,7 +5,9 @@
         </head>
         <body>
             <div ng-view>
-            <div data-role="tile" data-size="medium" class="bg-green"><h1 class="pos-absolute pos-center">1</h1></div>
+                <div id="tile-container" ng-controller="myCtrl">
+                    <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="bg-green"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#8451;</h1></div>
+                </div>
             </div>
 
             <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -18,13 +20,36 @@
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-route.min.js">
             </script>
             <script>  
-                var socket = io.connect('http://localhost:4200');
-                socket.on('connect', function(data) {
-                    socket.emit('join', 'Hello World from client');
-                });
 
-                socket.on('messages', function(data) {
-                    alert(data);
+                // app.controller('myCtrl', function ($scope) {
+                //     $scope.values = [
+                //     {id: 1},
+                //     {id: 2},
+                //     {id: 3},
+                //     {id: 4},
+                //     {id: 5},
+                //     {id: 6}
+                //     ];
+
+                //     $scope.filter = [1,2,3,4,5,6];
+
+                //     $scope.filterIds = function (ids) {
+                //             return function (item) {
+                //                 var filter = $scope.filter;
+                //                 return filter.indexOf(item.id) !== -1;          
+                //             }
+                //     }
+
+                //     $scope.loadNewFilter = function (){
+                //         $scope.filter = [1,2,3];      
+                //     }
+                // });
+
+                var socket = io.connect('http://localhost:4200');
+
+                socket.on('readouts', function(data) {
+                    //Update tiles
+                    console.log(data);
                 });
             </script>        
         </body>

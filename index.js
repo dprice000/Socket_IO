@@ -23,9 +23,17 @@ io.on('connection', function(client) {
     //     client.emit('messages', 'Hello from server');
     // });
 
-    setTimeout(function() {
+   // setTimeout(function() {
+        // A JSON formated list of temperatures.
+        var temps = [
+                { 'name' : 'Pipe1', 'value': 30 },
+                { 'name' : 'Pipe2', 'value': 22 },
+                { 'name' : 'Pipe3', 'value': 25 },
+                { 'name' : 'Pipe4', 'value': 32 }
+            ];
 
-    }, 3000);
+        console.log(temps);
 
-    client.emit('messages', 'We have updated');
+        client.emit('readouts', JSON.stringify(temps));
+    //}, 3000);
 });

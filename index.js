@@ -23,17 +23,15 @@ io.on('connection', function(client) {
     //     client.emit('messages', 'Hello from server');
     // });
 
-   // setTimeout(function() {
+    setInterval(function() {
         // A JSON formated list of temperatures.
         var temps = [
-                { 'name' : 'Pipe1', 'value': 30 },
-                { 'name' : 'Pipe2', 'value': 22 },
-                { 'name' : 'Pipe3', 'value': 25 },
-                { 'name' : 'Pipe4', 'value': 32 }
+                { 'name' : 'Pipe1', 'value': Math.floor(Math.random() * 100 + 1) },
+                { 'name' : 'Pipe2', 'value': Math.floor(Math.random() * 100 + 1) },
+                { 'name' : 'Pipe3', 'value': Math.floor(Math.random() * 100 + 1) },
+                { 'name' : 'Pipe4', 'value': Math.floor(Math.random() * 100 + 1) }
             ];
 
-        console.log(temps);
-
         client.emit('readouts', JSON.stringify(temps));
-    //}, 3000);
+    }, 3000);
 });

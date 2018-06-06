@@ -6,7 +6,7 @@
         <body>
             <div ng-view>
                 <div id="tile-container" ng-app="project" ng-controller="myCtrl">
-                    <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="bg-green"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#8451;</h1></div>
+                    <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="bg-green temp-tile"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#8451;</h1></div>
                 </div>
             </div>
 
@@ -21,10 +21,33 @@
             </script>
             <script>  
 
-                var socket = io.connect('http://localhost:4200');
-
                 var app = angular.module("project", []);
-                app.controller('myCtrl', function ($scope) {
+
+                app.factory('socket', function ($rootScope) {
+                    var socket = io.connect('http://localhost:4200');
+                    return {
+                        on: function (eventName, callback) {
+                        socket.on(eventName, function () {  
+                            var args = arguments;
+                            $rootScope.$apply(function () {
+                            callback.apply(socket, args);
+                            });
+                        });
+                        },
+                        emit: function (eventName, data, callback) {
+                        socket.emit(eventName, data, function () {
+                            var args = arguments;
+                            $rootScope.$apply(function () {
+                            if (callback) {
+                                callback.apply(socket, args);
+                            }
+                            });
+                        })
+                        }
+                    };
+                    });
+
+                app.controller('myCtrl', function ($scope, socket) {
                     $scope.temps = [
                         { 'name': 'Pipe1', 'value': 30 },
                         { 'name': 'Pipe2', 'value': 22 },
@@ -32,12 +55,13 @@
                         { 'name': 'Pipe4', 'value': 32 }
                     ];
 
-                    // socket.on('readouts', function(data) {
-                    //     // Parses new JSON and updates ViewModel temps property.
-                    //     $scope.temps = JSON.parse(data);
-                    // });
-
+                    socket.on('readouts', function(data) {
+                        // Parses new JSON and updates ViewModel temps property.
+                        console.log(data);
+                        $scope.temps = JSON.parse(data);
+                    });
                 });
+
             </script>        
         </body>
 </hmtl> 

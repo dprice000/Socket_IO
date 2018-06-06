@@ -5,3 +5,8 @@ html{
 body{
     background-color: #e8e7e1;
 }
+
+.temp-tile{
+    float:left;
+    padding: 10px 0;
+}

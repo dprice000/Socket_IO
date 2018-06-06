@@ -1,11 +1,11 @@
-<hmtl lang="en" ng-app="project">
+<hmtl lang="en" >
         <head>
             <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
             <link rel="stylesheet" href="index.css">
         </head>
         <body>
             <div ng-view>
-                <div id="tile-container" ng-controller="myCtrl">
+                <div id="tile-container" ng-app="project" ng-controller="myCtrl">
                     <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="bg-green"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#8451;</h1></div>
                 </div>
             </div>
@@ -21,35 +21,22 @@
             </script>
             <script>  
 
-                // app.controller('myCtrl', function ($scope) {
-                //     $scope.values = [
-                //     {id: 1},
-                //     {id: 2},
-                //     {id: 3},
-                //     {id: 4},
-                //     {id: 5},
-                //     {id: 6}
-                //     ];
-
-                //     $scope.filter = [1,2,3,4,5,6];
-
-                //     $scope.filterIds = function (ids) {
-                //             return function (item) {
-                //                 var filter = $scope.filter;
-                //                 return filter.indexOf(item.id) !== -1;          
-                //             }
-                //     }
-
-                //     $scope.loadNewFilter = function (){
-                //         $scope.filter = [1,2,3];      
-                //     }
-                // });
-
                 var socket = io.connect('http://localhost:4200');
 
-                socket.on('readouts', function(data) {
-                    //Update tiles
-                    console.log(data);
+                var app = angular.module("project", []);
+                app.controller('myCtrl', function ($scope) {
+                    $scope.temps = [
+                        { 'name': 'Pipe1', 'value': 30 },
+                        { 'name': 'Pipe2', 'value': 22 },
+                        { 'name': 'Pipe3', 'value': 25 },
+                        { 'name': 'Pipe4', 'value': 32 }
+                    ];
+
+                    // socket.on('readouts', function(data) {
+                    //     // Parses new JSON and updates ViewModel temps property.
+                    //     $scope.temps = JSON.parse(data);
+                    // });
+
                 });
             </script>        
         </body>

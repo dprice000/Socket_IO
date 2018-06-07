@@ -7,7 +7,7 @@
             <object id="svg1" data="rw.svg" type="image/svg+xml"></object>
             <div ng-view>
                 <div id="tile-container" ng-app="project" ng-controller="myCtrl">
-                    <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="bg-green temp-tile"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#8451;</h1></div>
+                    <div ng-repeat="temp in temps" data-role="tile" data-size="medium" class="temp-tile" ng-class="{'bg-red': temp.value >= 90, 'bg-orange': temp.value > 30 && temp.value < 90, 'bg-green': temp.value <= 30}"><span class="badge-top">{{temp.name}}</span><h1 class="pos-absolute pos-center">{{temp.value}}&#x2109;</h1></div>
                 </div>
             </div>
 
